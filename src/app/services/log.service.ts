@@ -13,12 +13,17 @@ export class LogService {
   private logSource = new BehaviorSubject<Log>({ id: null, text: null, date: null });
   selectedLog = this.logSource.asObservable();
 
+  private stateSource = new BehaviorSubject<boolean>(true);
+  stateClear = this.stateSource.asObservable();
+
   constructor() {
-    this.logs = [
+    /* this.logs = [
       { id: '1', text: 'Generated components', date: new Date() },
       { id: '2', text: 'Generated services', date: new Date() },
       { id: '3', text: 'Added local storage functionality', date: new Date() },
-    ]
+    ] */
+
+    this.logs = [];
   }
 
   getLogs(): Observable<Log[]> {
@@ -49,5 +54,11 @@ export class LogService {
       }
     })
   }
+
+  clearState() {
+    this.stateSource.next(true);
+  }
+
+
 
 }
